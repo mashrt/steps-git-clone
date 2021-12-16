@@ -48,7 +48,7 @@ func (r resetUnshallow) do(gitCmd git.Git) error {
 }
 
 func unshallowFetch(gitCmd git.Git, traits unshallowFetchOptions) error {
-	opts := []string{jobsFlag, "--unshallow"}
+	opts := []string{jobsFlag}
 	if traits.tags {
 		opts = append(opts, "--tags")
 	} else {
