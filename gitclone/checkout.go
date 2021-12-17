@@ -323,10 +323,11 @@ func selectFallbacks(method CheckoutMethod, fetchOpts fetchOptions) fallbackRetr
 		tags:            fetchOpts.tags,
 		fetchSubmodules: fetchOpts.fetchSubmodules,
 	}
-
+	
 	switch method {
 	case CheckoutNoneMethod,
-		CheckoutBranchMethod: // the given branch's tip will be checked out, no need to unshallow
+		CheckoutBranchMethod,
+		CheckoutPRManualMergeMethod: // the given branch's tip will be checked out, no need to unshallow
 		{
 			return nil
 		}
@@ -340,7 +341,6 @@ func selectFallbacks(method CheckoutMethod, fetchOpts fetchOptions) fallbackRetr
 			}
 		}
 	case CheckoutPRMergeBranchMethod,
-		CheckoutPRManualMergeMethod,
 		CheckoutPRDiffFileMethod:
 		{
 			return resetUnshallow{
